@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FabLab en classe</title>
+<meta name="description" content="Projets FabLab de la maternelle à la 3e, reliés aux notions du programme : schémas, déroulé, trace écrite, évaluation et fiches PDF.">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout : papier quadrillé d'atelier, colonne de lecture 1100px, fiches projet en 2 colonnes (texte | schéma) qui passent en 1 colonne sur téléphone */
+:root{
+  --bg:#F7F8F5; --grid:rgba(31,92,74,.07); --card:#FFFFFF; --ink:#1B2220; --muted:#56625D; --line:#D6DDD9;
+  --mat:#1F5C4A; --mat-ink:#FFFFFF; --mat-soft:#E2EDE7;
+  --kraft:#D2AE7C; --kraft-dk:#A9844F; --tape:#F2C230; --tape-soft:#FFF4CC; --water:#7DB3E0; --copper:#C47A3A; --cut:#D7263D; --glow:#FFD54A;
+  --warn-ink:#5A4300; --leaf:#7DBF7A; --leaf-dk:#2E7D4F; --pink:#EE8FB4;
+  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121715; --grid:rgba(108,196,161,.06); --card:#1A211E; --ink:#E7ECE9; --muted:#9AA8A2; --line:#2D3833;
+  --mat:#6CC4A1; --mat-ink:#0E1311; --mat-soft:#1D2D27;
+  --kraft:#9C7A4C; --kraft-dk:#C9A26C; --tape:#E3B52A; --tape-soft:#2E2812; --water:#3E6E96; --copper:#D08A4C; --cut:#FF5A6E; --glow:#FFD54A;
+  --warn-ink:#F5DB8A; --leaf:#5FA35C; --leaf-dk:#2E7D4F; --pink:#D9739C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715; --grid:rgba(108,196,161,.06); --card:#1A211E; --ink:#E7ECE9; --muted:#9AA8A2; --line:#2D3833;
+  --mat:#6CC4A1; --mat-ink:#0E1311; --mat-soft:#1D2D27;
+  --kraft:#9C7A4C; --kraft-dk:#C9A26C; --tape:#E3B52A; --tape-soft:#2E2812; --water:#3E6E96; --copper:#D08A4C; --cut:#FF5A6E; --glow:#FFD54A;
+  --warn-ink:#F5DB8A; --leaf:#5FA35C; --leaf-dk:#2E7D4F; --pink:#D9739C; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px;color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:20px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+a{color:var(--mat)}
+:focus-visible{outline:3px solid var(--tape);outline-offset:2px;border-radius:4px}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono)}
+
+/* En-tête */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:8px 16px;padding-block:10px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-weight:800;font-size:1.15rem;margin-right:auto}
+.logo svg{width:30px;height:30px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:999px;font-weight:700;font-size:.95rem}
+nav.main a:hover{background:var(--mat-soft)}
+nav.main a[aria-current="page"]{background:var(--mat);color:var(--mat-ink)}
+
+main{padding-block:32px 64px}
+.view{display:flex;flex-direction:column;gap:40px}
+
+/* Accueil */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
+.hero > *{min-width:0}
+.hero p.lead{font-size:1.2rem;color:var(--muted);margin-top:16px;max-width:36em}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid var(--mat);font-size:1rem;cursor:pointer;font-family:var(--f-body)}
+.btn.primary{background:var(--mat);color:var(--mat-ink)}
+.btn.ghost{background:transparent;color:var(--mat)}
+.hero-art{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hero-art a{background:var(--mat-soft);border-radius:10px;padding:6px;display:block}
+.hero-art svg{width:100%;height:auto;display:block}
+.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.promise div{border-top:3px solid var(--mat);padding-top:12px}
+.promise b{display:block;font-family:var(--f-display);font-size:1.05rem;margin-bottom:4px}
+.promise span{color:var(--muted);font-size:.95rem}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:999px;font-weight:700;font-size:.92rem;cursor:pointer;font-family:var(--f-body)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lvsel{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;margin-left:6px}
+.lvsel select{font:inherit;padding:6px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .15s,box-shadow .15s}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+.pcard .art{background:var(--mat-soft);padding:10px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center}
+.pcard .art svg{width:100%;height:100%}
+.pcard .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pcard h3{font-size:1.12rem}
+.pcard p{color:var(--muted);font-size:.93rem;line-height:1.45}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{font-family:var(--f-mono);font-size:.72rem;padding:3px 8px;border-radius:6px;background:var(--mat-soft);color:var(--ink);white-space:nowrap}
+.tag.cyc{background:var(--ink);color:var(--bg)}
+.tag.mach{background:var(--tape-soft);color:var(--warn-ink)}
+.tag.ev{background:var(--pink);color:#2a1020}
+.tag.tx{background:var(--water);color:#0d1f2d}
+.cyclehead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:-6px}
+.cyclehead span{color:var(--muted)}
+
+/* Fiche projet */
+.crumb{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.95rem}
+.crumb a{font-weight:700}
+.phead{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+.phead > *{min-width:0}
+.phead .art{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:20px}
+.facts div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.facts dt{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-weight:700}
+.defi{margin-top:20px;background:var(--tape-soft);border-left:6px solid var(--tape);padding:16px 18px;border-radius:0 12px 12px 0}
+.defi .eyebrow{color:var(--warn-ink)}
+.defi p{font-family:var(--f-display);font-size:1.3rem;font-weight:700;line-height:1.3;margin-top:4px}
+.mode{display:flex;gap:0;border:2px solid var(--mat);border-radius:10px;overflow:hidden;width:max-content;max-width:100%}
+.mode button{border:0;background:transparent;color:var(--mat);padding:8px 14px;font-weight:700;cursor:pointer;font-family:var(--f-body);font-size:.92rem}
+.mode button[aria-pressed="true"]{background:var(--mat);color:var(--mat-ink)}
+.toolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.toolbar small{color:var(--muted)}
+.dl{display:flex;gap:12px;flex-wrap:wrap}
+.src{font-size:.88rem;color:var(--muted);margin-top:8px}
+.regards{font-size:.92rem;color:var(--muted);margin-top:4px;max-width:60em}
+.regards b{color:var(--mat)}
+.progbox .ntable table{min-width:0}
+.progbox td{font-size:.88rem}
+.progbox .pn{display:block;font-weight:700}
+.progbox .ntable td a{font-weight:400;color:var(--muted)}
+.progbox .new{display:table;margin-top:4px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;background:var(--mat-soft);color:var(--mat);border-radius:6px;padding:2px 6px}
+.about dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;margin:0}
+.about dt{font-weight:700}.about dd{margin:0}
+.about ul.refs{padding-left:1.1em;margin:8px 0 0}.about ul.refs li{margin:4px 0}
+@media (max-width:560px){.about dl{grid-template-columns:1fr}.about dt{margin-top:8px}}
+
+.sec{display:flex;flex-direction:column;gap:16px}
+.sec > header{display:flex;flex-direction:column;gap:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.two > *{min-width:0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.box h3{margin-bottom:10px}
+ul.clean{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+ul.check li{padding-left:28px;position:relative}
+ul.check li::before{content:"";position:absolute;left:2px;top:.3em;width:14px;height:14px;border:2px solid var(--mat);border-radius:3px}
+table.mat{width:100%;border-collapse:collapse;font-size:.97rem}
+table.mat td{padding:6px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+table.mat td:first-child{font-family:var(--f-mono);font-weight:600;white-space:nowrap;padding-right:14px;color:var(--mat);width:1%}
+.learn li{padding-left:22px;position:relative}
+.learn li::before{content:"→";position:absolute;left:0;color:var(--mat);font-weight:700}
+.prog{margin-top:12px;font-size:.9rem;color:var(--muted)}
+
+.seances{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.seance h4{font-size:1.05rem;display:flex;justify-content:space-between;gap:10px;margin-bottom:10px}
+.seance h4 span{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:400;white-space:nowrap}
+.timeline{display:flex;flex-direction:column;gap:8px}
+.timeline div{display:grid;grid-template-columns:58px 1fr;gap:10px;font-size:.95rem}
+.timeline b{font-family:var(--f-mono);font-size:.8rem;color:var(--mat);background:var(--mat-soft);border-radius:6px;padding:2px 6px;height:max-content;text-align:center}
+
+.steps{display:flex;flex-direction:column;gap:18px;counter-reset:st}
+.step{display:grid;grid-template-columns:1fr 1.05fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.step > *{min-width:0}
+.step .txt{padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.step .num{font-family:var(--f-display);font-weight:800;font-size:.9rem;color:var(--mat-ink);background:var(--mat);width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.step h4{font-size:1.2rem;display:flex;gap:10px;align-items:center}
+.step .fig{background:var(--mat-soft);display:flex;align-items:center;justify-content:center;padding:12px;border-left:1px solid var(--line)}
+.step .fig svg{width:100%;height:auto;max-height:280px}
+.tip{font-size:.92rem;background:var(--bg);border-radius:8px;padding:8px 10px;border:1px dashed var(--line)}
+.tip b{color:var(--mat)}
+.say{font-style:italic;color:var(--muted);font-size:.95rem}
+pre.code{background:var(--ink);color:var(--bg);font-family:var(--f-mono);font-size:.85rem;padding:14px;border-radius:10px;overflow-x:auto;margin:0;line-height:1.5}
+
+.restable{overflow-x:auto}
+.restable table{border-collapse:collapse;min-width:100%;font-size:.95rem;background:var(--card)}
+.restable th,.restable td{border:1.5px solid var(--line);padding:10px 12px;text-align:left}
+.restable th{background:var(--mat-soft);font-family:var(--f-body)}
+.restable td{height:40px;font-variant-numeric:tabular-nums}
+.restable td.ex{color:var(--muted);font-style:italic}
+
+.pannes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.panne{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.panne b{display:block;margin-bottom:4px}
+.panne span{color:var(--muted);font-size:.95rem}
+.grid-eval{overflow-x:auto}
+.grid-eval table{border-collapse:collapse;width:100%;min-width:560px;background:var(--card);font-size:.93rem}
+.grid-eval th,.grid-eval td{border:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left}
+.grid-eval th{background:var(--mat-soft)}
+.safety{background:var(--tape-soft);border:2px solid var(--tape);border-radius:14px;padding:16px 20px}
+.safety h3{color:var(--warn-ink);margin-bottom:8px}
+.safety li{color:var(--ink)}
+.fablabup{background:var(--ink);color:var(--bg);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.fablabup .eyebrow{color:var(--tape)}
+.fablabup ul{margin:0;padding-left:20px}
+.nextprev{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Didactique */
+.didac{border:2px solid var(--mat);border-radius:18px;padding:22px;background:var(--card)}
+.remplace{background:var(--mat);color:var(--mat-ink);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.remplace .eyebrow{color:var(--mat-ink);opacity:.8}
+.remplace p{font-size:1.08rem;line-height:1.5}
+.phasechip{align-self:flex-start;font-family:var(--f-mono);font-size:.75rem;background:var(--mat-ink);color:var(--mat);padding:3px 9px;border-radius:6px}
+.ntable{overflow-x:auto}
+.ntable table{border-collapse:collapse;width:100%;min-width:600px;font-size:.95rem}
+.ntable th,.ntable td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.ntable th{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.ntable td.disc{font-weight:700;white-space:nowrap}
+.ntable td.moment{color:var(--muted)}
+.concep{display:flex;flex-direction:column;gap:10px}
+.concep div{display:grid;grid-template-columns:1fr 1.3fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.concep div > *{min-width:0;padding:12px 14px}
+.concep .avant{background:var(--tape-soft);font-style:italic}
+.concep .apres{background:var(--bg)}
+.concep .apres::before{content:"Ce que le projet leur fait constater";font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;color:var(--mat);display:block;margin-bottom:2px;font-style:normal}
+.concep .avant::before{content:"Ce que pensent souvent les élèves";font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;color:var(--warn-ink);display:block;margin-bottom:2px;font-style:normal}
+.vocab{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.vocab span{border:1.5px solid var(--mat);color:var(--mat);border-radius:999px;padding:2px 10px;font-size:.88rem;font-weight:700}
+.cahier{background:var(--card);border:1px solid var(--line);border-radius:4px 14px 14px 4px;padding:18px 20px 18px 44px;position:relative;background-image:repeating-linear-gradient(transparent 0 27px,var(--line) 27px 28px);background-position:0 46px;line-height:28px}
+.cahier::before{content:"";position:absolute;left:30px;top:0;bottom:0;border-left:2px solid var(--cut);opacity:.5}
+.cahier h3{line-height:28px;margin-bottom:0}
+.cahier p{margin:0}
+.diffcols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.diffcols > div{min-width:0}
+.diffcols h4{font-size:1rem;margin-bottom:6px}
+/* Séquence */
+.seqbar{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.seqbar > div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.seqbar > div.fab{border:2px solid var(--mat);background:var(--mat-soft)}
+.seqbar .n{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.seqbar b{font-family:var(--f-display);font-size:1.02rem;line-height:1.2}
+.seqbar span.what{font-size:.9rem;color:var(--muted)}
+.seqbar .lab{font-family:var(--f-mono);font-size:.7rem;background:var(--mat);color:var(--mat-ink);border-radius:5px;padding:2px 6px;align-self:flex-start}
+.rules{counter-reset:r;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.rules div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;counter-increment:r}
+.rules div::before{content:counter(r);font-family:var(--f-display);font-weight:800;font-size:1.6rem;color:var(--mat);display:block;line-height:1;margin-bottom:6px}
+.rules b{display:block;margin-bottom:4px}
+.rules span{color:var(--muted);font-size:.95rem}
+.example{background:var(--tape-soft);border-left:6px solid var(--tape);border-radius:0 12px 12px 0;padding:16px 20px}
+.example .eyebrow{color:var(--warn-ink)}
+.example p{margin-top:6px}
+.bydisc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.bydisc a{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;transition:border-color .15s}
+.bydisc a:hover{border-color:var(--mat)}
+.bydisc b{font-family:var(--f-display);font-size:1.15rem}
+.bydisc span{color:var(--muted);font-size:.92rem}
+.disc-group{display:flex;flex-direction:column;gap:10px}
+.disc-group h3{font-size:1.35rem}
+.ntable td a{font-weight:700}
+
+/* vue élève */
+body.eleve .prof{display:none !important}
+body.eleve .defi p{font-size:1.8rem}
+body.eleve .step .txt{font-size:1.15rem}
+body.eleve .step h4{font-size:1.45rem}
+
+/* Méthode */
+.cycle-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:28px;align-items:center}
+.cycle-wrap > *{min-width:0}
+.phases{display:flex;flex-direction:column;gap:12px}
+.phase{display:grid;grid-template-columns:36px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.phase .n{width:32px;height:32px;border-radius:50%;background:var(--mat);color:var(--mat-ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--f-display)}
+.phase p{font-size:.95rem}
+.phase .say{margin-top:4px}
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.do-dont > div{border-radius:14px;padding:16px 20px;border:2px solid var(--line);background:var(--card)}
+.do-dont .yes{border-color:var(--mat)}
+.do-dont h3{margin-bottom:8px}
+
+/* Étapes détaillées */
+.phasecards{display:flex;flex-direction:column;gap:14px}
+.pc{display:grid;grid-template-columns:210px 1fr;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pc > *{min-width:0}
+.pc .side{background:var(--mat-soft);padding:18px;display:flex;flex-direction:column;gap:6px}
+.pc .side .n{width:36px;height:36px;border-radius:50%;background:var(--mat);color:var(--mat-ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--f-display);font-size:1.1rem}
+.pc .side h3{font-size:1.3rem}
+.pc .side .goal{font-size:.95rem}
+.pc .side .dur{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.pc .main{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
+.pc .main div{min-width:0}
+.pc .main h4{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;margin-bottom:4px}
+.pc .main p{font-size:.95rem}
+.pc .avoid{grid-column:1/-1;border-left:4px solid var(--cut);padding:6px 12px;background:var(--bg);border-radius:0 8px 8px 0}
+.pc .avoid h4{color:var(--cut)}
+.pc .ex{grid-column:1/-1;background:var(--tape-soft);padding:8px 12px;border-radius:8px}
+.pc .ex h4{color:var(--warn-ink)}
+@media (max-width:760px){.pc{grid-template-columns:1fr}.pc .main{grid-template-columns:1fr}}
+
+/* Démarrer */
+.start{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.start > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.start .big{font-family:var(--f-display);font-size:2.6rem;font-weight:800;color:var(--mat);line-height:1}
+.kit{columns:2;column-gap:28px}
+.kit li{break-inside:avoid;margin-bottom:6px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.faq details + details{margin-top:10px}
+.faq summary{font-weight:700;cursor:pointer}
+.faq details p{margin-top:8px;color:var(--muted)}
+
+/* Sécurité */
+.agecols{overflow-x:auto}
+.agecols table{border-collapse:collapse;width:100%;min-width:720px;background:var(--card);font-size:.93rem}
+.agecols th,.agecols td{border:1px solid var(--line);padding:10px;vertical-align:top;text-align:left}
+.agecols th{background:var(--mat-soft)}
+.agecols td.no{color:var(--cut);font-weight:700}
+
+footer{border-top:1px solid var(--line);padding-block:24px;color:var(--muted);font-size:.9rem}
+
+/* SVG schémas */
+svg .o{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+svg .of{fill:var(--card);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+svg .k{fill:var(--kraft);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+svg .kd{fill:var(--kraft-dk);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+svg .w{fill:var(--water);opacity:.6}
+svg .a{fill:none;stroke:var(--mat);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+svg .af{fill:var(--mat)}
+svg .cu{fill:var(--copper);stroke:var(--ink);stroke-width:1}
+svg .cut{fill:none;stroke:var(--cut);stroke-width:2}
+svg .tp{fill:var(--tape);stroke:var(--ink);stroke-width:1.5}
+svg .gl{fill:var(--glow);opacity:.45}
+svg .seed{fill:var(--kraft-dk);stroke:var(--ink);stroke-width:.6}
+svg .bot{fill:var(--water);fill-opacity:.3;stroke:var(--ink);stroke-width:2}
+svg .ocre{fill:#B5562B;opacity:.85}
+svg .ocref{fill:#B5562B}
+svg .ice{fill:#CFE8FA;stroke:var(--ink);stroke-width:1.5}
+svg .aw{fill:none;stroke:var(--mat);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+svg .glf{fill:var(--glow);stroke:var(--ink);stroke-width:1}
+svg .lf{fill:var(--leaf);stroke:var(--ink)}
+svg .lfd{fill:var(--leaf-dk);stroke:var(--ink)}
+svg .berry{fill:var(--cut);stroke:var(--ink);stroke-width:1.2}
+svg .pk{fill:var(--pink);stroke:var(--ink);stroke-width:1.5}
+svg .vb{fill:var(--water);stroke:var(--ink);stroke-width:1.5}
+svg .tpf{fill:var(--tape);stroke:var(--ink);stroke-width:1.5}
+svg .vr{fill:var(--cut);stroke:var(--ink);stroke-width:1.5}
+svg .cv{fill:var(--water);stroke:var(--ink);stroke-width:2}
+svg .hole{fill:var(--mat-soft)}
+svg .holeo{fill:none;stroke:var(--ink);stroke-width:1.3}
+svg .holes{fill:var(--mat-soft);stroke:var(--ink);stroke-width:1.3}
+svg .hole2{fill:var(--mat-soft);stroke:var(--mat);stroke-width:1.5;stroke-dasharray:4 3}
+svg .kraftfill{fill:var(--kraft)}
+svg .gridl{stroke:var(--line);stroke-width:.6;opacity:.7}
+svg .lplomb{font-family:var(--f-body);font-size:12px;font-weight:700;fill:var(--tape)}
+svg .v1{fill:var(--cut);opacity:.9} svg .v2{fill:var(--water)} svg .v3{fill:var(--tape)} svg .v4{fill:var(--leaf)}
+svg .ink{fill:var(--ink)}
+svg .dash{stroke-dasharray:5 4}
+svg .c{stroke:var(--muted);stroke-width:1.2;fill:none}
+svg .t{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+svg .l{font-family:var(--f-body);font-size:12px;fill:var(--ink);font-weight:700}
+svg .la{font-family:var(--f-body);font-size:12px;fill:var(--mat);font-weight:700}
+svg .lw{font-family:var(--f-body);font-size:12px;fill:var(--cut);font-weight:700}
+
+@media (max-width:900px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .seqbar{grid-template-columns:1fr 1fr}
+  .bydisc{grid-template-columns:1fr 1fr}
+  .promise{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .hero,.phead,.two,.cycle-wrap,.do-dont,.start{grid-template-columns:1fr}
+  .step{grid-template-columns:1fr}
+  .step .fig{border-left:0;border-top:1px solid var(--line);order:-1}
+  .kit{columns:1}
+  .concep div,.diffcols{grid-template-columns:1fr}
+  .didac{padding:16px}
+  body{font-size:16px}
+}
+@media (max-width:480px){
+  .cards{grid-template-columns:1fr}
+  .seqbar,.bydisc{grid-template-columns:1fr}
+  .promise{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.pcard{transition:none}.pcard:hover{transform:none}}
+/* ===== Projets & créativité ===== */
+nav.main a.crnav{border:2px solid var(--mat)}
+.crsub{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:4px;margin-top:-8px}
+.crsub a{flex:none;text-decoration:none;color:var(--ink);font-weight:700;font-size:.88rem;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);white-space:nowrap}
+.crsub a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.crhero{display:flex;flex-direction:column;gap:28px}
+.crhero > *{min-width:0}
+.crhero .lead{font-size:1.18rem;color:var(--muted);margin-top:14px;max-width:46em}
+.shift{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch}
+.shift > div{border-radius:14px;padding:16px 18px;min-width:0}
+.shift .from{background:var(--card);border:2px dashed var(--line);color:var(--muted)}
+.shift .to{background:var(--mat);color:var(--mat-ink)}
+.shift .to .eyebrow{color:var(--mat-ink);opacity:.85}
+.shift p{font-family:var(--f-display);font-weight:700;font-size:1.15rem;line-height:1.3;margin-top:6px}
+.shift .arrow{display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--mat);font-weight:800}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow span{background:var(--card);border:1.5px solid var(--mat);color:var(--ink);border-radius:999px;padding:5px 12px;font-weight:700;font-size:.92rem}
+.flow span.err{border-color:var(--cut);color:var(--cut)}
+.flow span.end{background:var(--mat);color:var(--mat-ink)}
+.flow i{font-style:normal;color:var(--mat);font-weight:800}
+.flowsvg{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px}
+.flowsvg svg{width:100%;height:auto;display:block}
+.flow{display:none}
+@media (max-width:560px){.flowsvg{display:none}.flow{display:flex}}
+.entries{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.entry{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;transition:border-color .15s,transform .15s}
+.entry:hover{border-color:var(--mat);transform:translateY(-2px)}
+.entry .ico{width:40px;height:40px;border-radius:10px;background:var(--mat-soft);display:flex;align-items:center;justify-content:center}
+.entry .ico svg{width:24px;height:24px;stroke:var(--mat);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.entry b{font-family:var(--f-display);font-size:1.12rem}
+.entry span{color:var(--muted);font-size:.92rem}
+.cyc4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cyc4 a{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-top:6px solid var(--mat);border-radius:14px;padding:16px;min-width:0}
+.cyc4 a:hover{border-color:var(--mat)}
+.cyc4 .eyebrow{color:var(--mat)}
+.cyc4 b{font-family:var(--f-display);font-size:1.15rem;line-height:1.25}
+.cyc4 span.n{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);margin-top:auto}
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.themes a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.themes a:hover{border-color:var(--mat)}
+.themes b{font-size:1rem}
+.themes span{color:var(--muted);font-size:.85rem;line-height:1.35}
+.themes em{font-style:normal;font-family:var(--f-mono);font-size:.75rem;color:var(--mat)}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick a{text-decoration:none}
+/* Banque */
+.bfilters{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.bfrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.bfrow > .lab{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);min-width:92px}
+.bfrow .chip{padding:5px 11px;font-size:.86rem}
+.bfsel{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bfsel label{display:flex;flex-direction:column;gap:4px;font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.bfsel select,.bfsel input{font:inherit;font-family:var(--f-body);font-size:.95rem;text-transform:none;letter-spacing:0;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:7px 10px}
+.bcount{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.bcount b{font-family:var(--f-display);font-size:1.1rem}
+.linkbtn{background:none;border:0;color:var(--mat);font-weight:700;cursor:pointer;font:inherit;font-weight:700;text-decoration:underline}
+.scards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.scard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;transition:transform .15s,box-shadow .15s;position:relative}
+.scard:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.07)}
+.scard.full{border:2px solid var(--mat)}
+.scard h3{font-size:1.12rem}
+.scard p.q{color:var(--muted);font-size:.93rem;line-height:1.45}
+.scard .meta{margin-top:auto}
+.tag.full{background:var(--mat);color:var(--mat-ink)}
+.tag.ouv-ouvert{background:var(--leaf);color:#0e2410}
+.tag.ouv-semi{background:var(--tape-soft);color:var(--warn-ink)}
+.tag.ouv-guide{background:var(--line);color:var(--ink)}
+.tag.th{background:transparent;border:1px solid var(--line);color:var(--muted)}
+/* Fiche situation */
+.sphead{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
+.sphead > *{min-width:0}
+.probleme{margin-top:18px;background:var(--tape-soft);border-left:6px solid var(--tape);padding:16px 18px;border-radius:0 12px 12px 0}
+.probleme .eyebrow{color:var(--warn-ink)}
+.probleme p{font-family:var(--f-display);font-size:1.28rem;font-weight:700;line-height:1.3;margin-top:4px}
+.sitbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.sitbox p{margin-top:6px}
+.adire{background:var(--mat-soft);border-radius:12px;padding:14px 16px}
+.adire .eyebrow{color:var(--mat)}
+.adire p{margin-top:4px;font-style:italic}
+.tabs{display:flex;gap:6px;overflow-x:auto;border-bottom:2px solid var(--line);padding-bottom:0;position:sticky;top:var(--hh,58px);background:var(--bg);z-index:5}
+.tabs button{flex:none;border:0;background:transparent;font:inherit;font-weight:700;color:var(--muted);padding:10px 12px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--mat);border-bottom-color:var(--mat)}
+.tabs button.all{margin-left:auto;color:var(--mat);font-weight:600;font-size:.9rem}
+.tabp{display:flex;flex-direction:column;gap:18px;padding-top:18px}
+.tabp[hidden]{display:none !important}
+.showall .tabp{display:flex !important}
+.showall .tabp + .tabp{border-top:2px dashed var(--line);margin-top:10px}
+.tabp > h2.tabtitle{display:none}
+.showall .tabp > h2.tabtitle{display:block}
+.nepas{background:var(--card);border:2px solid var(--cut);border-radius:14px;padding:16px 20px}
+.nepas h3{color:var(--cut);margin-bottom:8px}
+.nepas li{padding-left:24px;position:relative}
+.nepas li::before{content:"✕";position:absolute;left:0;color:var(--cut);font-weight:800}
+.quest{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.quest ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+.quest li{background:var(--bg);border-radius:10px;padding:8px 12px;font-style:italic}
+.quest li::before{content:"« "}.quest li::after{content:" »"}
+details.pistes{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:12px 18px}
+details.pistes summary{cursor:pointer;font-weight:700}
+details.pistes ul{margin-top:10px}
+.techs{display:flex;flex-wrap:wrap;gap:8px}
+.techs a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700;font-size:.9rem;border:1.5px solid var(--mat);color:var(--mat);border-radius:999px;padding:4px 12px;background:var(--card)}
+.iter{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.iter > div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:6px;position:relative}
+.iter > div .eyebrow{color:var(--mat)}
+.iter > div.bad{border-color:var(--cut)}
+.iter > div.bad .eyebrow{color:var(--cut)}
+.fixes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.fixes > div{display:grid;grid-template-columns:1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.fixes .pb{padding:10px 14px;background:var(--tape-soft)}
+.fixes .pb::before{content:"Problème observé";display:block;font-family:var(--f-mono);font-size:.68rem;text-transform:uppercase;color:var(--warn-ink)}
+.fixes .fx{padding:10px 14px}
+.fixes .fx::before{content:"Modification possible";display:block;font-family:var(--f-mono);font-size:.68rem;text-transform:uppercase;color:var(--mat)}
+.regards3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.regards3 > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0;border-top:5px solid var(--mat)}
+.regards3 > div:nth-child(2){border-top-color:var(--tape)}
+.regards3 > div:nth-child(3){border-top-color:var(--water)}
+.regards3 h3{font-size:1.1rem;margin-bottom:8px}
+.ptable{overflow-x:auto}
+.ptable table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem;background:var(--card)}
+.ptable th,.ptable td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+.ptable th{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.ptype{font-family:var(--f-mono);font-size:.7rem;border-radius:6px;padding:2px 7px;background:var(--mat-soft);color:var(--mat);white-space:nowrap}
+.ptype.t-Transversale{background:var(--tape-soft);color:var(--warn-ink)}
+.ptype.t-Démarche{background:var(--water);color:#0d1f2d}
+.ptable td.why{color:var(--muted)}
+.rescards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.rescards a{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;min-width:0}
+.rescards a .mini{width:64px;flex:none;background:var(--mat-soft);border-radius:8px;padding:3px}
+.rescards a .mini svg{width:100%;height:auto;display:block}
+.rescards a span{font-weight:700;font-size:.92rem;line-height:1.25}
+.rescards a small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.fabbox{background:var(--ink);color:var(--bg);border-radius:14px;padding:18px 20px}
+.fabbox .eyebrow{color:var(--tape)}
+.fabbox p{margin-top:6px}
+/* Note enseignant dans les projets */
+.crnote{border:2px solid var(--tape);border-radius:18px;padding:20px;background:var(--card);display:flex;flex-direction:column;gap:16px}
+.crnote > header{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between}
+.crnote > header .eyebrow{color:var(--warn-ink)}
+.crnote .q{font-family:var(--f-display);font-weight:700;font-size:1.22rem;line-height:1.3}
+.crnote .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
+.crnote .cols > *{min-width:0}
+.crnote .usage{font-size:.95rem;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:10px 14px}
+.crnote .usage b{color:var(--mat)}
+.etsi{background:var(--mat);color:var(--mat-ink);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.etsi .eyebrow{color:var(--mat-ink);opacity:.85}
+.etsi a{color:var(--mat-ink);font-weight:700}
+.etsi .sps{display:flex;flex-wrap:wrap;gap:6px}
+.etsi .sps a{background:var(--mat-ink);color:var(--mat);border-radius:999px;padding:3px 10px;text-decoration:none;font-size:.88rem}
+.techres{font-size:.92rem;color:var(--muted);background:var(--mat-soft);border-radius:10px;padding:8px 12px}
+.techres b{color:var(--mat)}
+/* Pages de la rubrique */
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;align-items:start}
+details.tool{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+details.tool[open]{border-color:var(--mat);grid-column:1/-1}
+details.tool summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center}
+details.tool summary::-webkit-details-marker{display:none}
+details.tool summary .ico{width:44px;height:44px;border-radius:12px;background:var(--mat-soft);display:flex;align-items:center;justify-content:center}
+details.tool summary .ico svg{width:26px;height:26px;stroke:var(--mat);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+details.tool summary b{font-family:var(--f-display);font-size:1.1rem;display:block}
+details.tool summary span{color:var(--muted);font-size:.9rem;display:block;margin-top:2px}
+details.tool .tbody{padding:0 18px 18px;display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+details.tool .tbody > *{min-width:0}
+details.tool ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.cycrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cycrow > div{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:.9rem;min-width:0}
+.cycrow > div b{display:block;font-family:var(--f-mono);font-size:.72rem;color:var(--mat);text-transform:uppercase}
+.trap{background:var(--tape-soft);border-radius:10px;padding:10px 12px;font-size:.93rem}
+.trap b{color:var(--warn-ink)}
+.temps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.temps > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.temps > div h3{font-size:1.05rem}
+.temps .st{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:.9rem}
+.temps .st b{display:block}
+.temps .st em{display:block;color:var(--muted);font-style:italic;font-size:.86rem;margin-top:2px}
+.prog4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.prog4 > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:10px;border-top:6px solid var(--mat)}
+.prog4 > div:nth-child(1){border-top-color:var(--pink)}
+.prog4 > div:nth-child(2){border-top-color:var(--tape)}
+.prog4 > div:nth-child(3){border-top-color:var(--water)}
+.prog4 .motto{font-family:var(--f-display);font-weight:800;font-size:1.15rem;line-height:1.25}
+.prog4 h4{font-size:.95rem;margin-top:4px}
+.prog4 ul{margin:0;padding-left:18px;font-size:.92rem}
+.stairs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:end}
+.stairs > div{background:var(--mat);color:var(--mat-ink);border-radius:10px 10px 0 0;padding:10px;font-weight:700;font-size:.9rem;display:flex;flex-direction:column;justify-content:flex-end}
+.stairs > div span{font-family:var(--f-mono);font-size:.72rem;opacity:.85}
+.dtable{overflow-x:auto}
+.dtable table{border-collapse:collapse;width:100%;min-width:760px;font-size:.92rem;background:var(--card)}
+.dtable th,.dtable td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+.dtable thead th{background:var(--mat-soft)}
+.dtable tbody th{background:var(--bg);white-space:nowrap}
+.say2{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.say2 > div{padding:10px 14px;min-width:0;border-bottom:1px solid var(--line)}
+.say2 > div:nth-last-child(-n+2){border-bottom:0}
+.say2 .no{background:var(--tape-soft);text-decoration:line-through;text-decoration-color:var(--cut);color:var(--ink)}
+.say2 .yes{background:var(--card)}
+.say2 .hd{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-decoration:none;background:var(--bg)}
+.ladder{display:flex;flex-direction:column;gap:8px}
+.ladder > div{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.ladder .n{width:34px;height:34px;border-radius:50%;background:var(--mat);color:var(--mat-ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--f-display)}
+.ladder > div:last-child .n{background:var(--cut);color:#fff}
+.qphases{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.qphases > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.qphases h3{font-size:1.02rem;margin-bottom:8px}
+.qphases li{font-style:italic;font-size:.93rem}
+.cards2{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.cards2 > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0}
+.cards2 h3{font-size:1.02rem;margin-bottom:6px}
+.cards2 p{font-size:.93rem;color:var(--muted)}
+.transfo{display:flex;flex-direction:column;gap:8px}
+.transfo > div{display:grid;grid-template-columns:1fr 36px 2fr;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.transfo .o{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--cut)}
+.transfo .a{color:var(--mat);font-weight:800;text-align:center}
+.transfo .p{font-weight:700}
+.transfo .p a{font-weight:400;font-size:.88rem;display:inline-block;margin-left:4px}
+.places{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.places > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.places h3{font-size:1.05rem;margin-bottom:6px}
+.places li{font-size:.93rem}
+.checklist li{padding-left:30px;position:relative}
+.checklist li::before{content:"";position:absolute;left:2px;top:.25em;width:16px;height:16px;border:2px solid var(--mat);border-radius:4px}
+.tpl{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.tpl table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:560px}
+.tpl td,.tpl th{border:1.5px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+.tpl th{background:var(--mat-soft)}
+.tpl td{height:46px}
+.tplwrap{overflow-x:auto}
+.crbanner{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;background:var(--mat);color:var(--mat-ink);border-radius:18px;padding:22px 24px}
+.crbanner .eyebrow{color:var(--mat-ink);opacity:.85}
+.crbanner h2{margin-top:6px}
+.crbanner p{margin-top:8px;max-width:46em;opacity:.95}
+.crbanner .btn{background:var(--mat-ink);color:var(--mat);border-color:var(--mat-ink)}
+.notionlink{margin-top:4px;font-size:.92rem}
+@media (max-width:900px){
+ .crhero,.sphead{grid-template-columns:1fr}
+ .cyc4,.prog4,.stairs{grid-template-columns:1fr 1fr}
+ .temps{grid-template-columns:1fr 1fr}
+ .iter{grid-template-columns:1fr 1fr}
+ .regards3{grid-template-columns:1fr}
+ details.tool .tbody{grid-template-columns:1fr}
+ .crnote .cols{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+ .shift{grid-template-columns:1fr}.shift .arrow{transform:rotate(90deg)}
+ .cyc4,.prog4,.temps,.iter,.cycrow{grid-template-columns:1fr}
+ .stairs{grid-template-columns:repeat(4,1fr)}.stairs > div{font-size:.75rem;padding:6px}
+ .say2{grid-template-columns:1fr}.say2 .hd:nth-child(2){display:none}
+ .transfo > div{grid-template-columns:1fr}.transfo .a{transform:rotate(90deg);text-align:left;width:20px}
+ .crbanner{grid-template-columns:1fr}
+ .crsub{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
+ .bfrow > .lab{min-width:100%}
+}
+@media print{.tabs,.crsub,.bfilters{display:none !important}.tabp{display:flex !important}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#accueil" aria-label="FabLab en classe, accueil">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="9" width="26" height="18" rx="2" fill="var(--kraft)" stroke="var(--ink)" stroke-width="2"/><path d="M3 9 L9 3 H23 L29 9" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><circle cx="16" cy="18" r="4" fill="var(--mat)"/></svg>
+      FabLab en classe
+    </a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#accueil" data-nav="accueil">Projets</a>
+      <a href="#creativite" data-nav="creativite" class="crnav">Projets & créativité</a>
+      <a href="#notions" data-nav="notions">Par notion</a>
+      <a href="#demarrer" data-nav="demarrer">Démarrer</a>
+      <a href="#methode" data-nav="methode">La méthode</a>
+      <a href="#securite" data-nav="securite">Sécurité</a>
+      <a href="#apropos" data-nav="apropos">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ACCUEIL -->
+<section id="v-accueil" class="view">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Ressource pour les enseignants · de la maternelle à la 3e</p>
+      <h1 style="margin-top:10px">Des projets FabLab au service de vos séquences</h1>
+      <p class="lead">Du carton, du papier, un défi que l’on peut mesurer. Chaque fiche dit quelle notion de votre programme le projet fait acquérir et quelle séance de votre séquence il remplace. Elle donne aussi le matériel exact, le déroulé et un schéma pour chaque étape.</p>
+      <div class="actions">
+        <a class="btn primary" href="#demarrer">Premier projet ? Commencer ici</a>
+        <a class="btn ghost" href="#projets">Voir les projets</a>
+      </div>
+    </div>
+    <div class="hero-art" id="hero-art"></div>
+  </div>
+
+  <div class="promise">
+    <div><b>Au service de votre séquence</b><span>La notion visée, la séance remplacée, la trace écrite pour le cahier.</span></div>
+    <div><b>Des étapes dessinées</b><span>Un schéma coté par étape, à projeter au tableau.</span></div>
+    <div><b>Un déroulé minuté</b><span>Ce que vous faites, minute par minute, séance par séance.</span></div>
+    <div><b>Les pannes prévues</b><span>Ce qui rate souvent et comment le corriger avec les élèves.</span></div>
+  </div>
+
+  <div class="crbanner"><div><p class="eyebrow">Projets & créativité</p><h2>Partir d’un problème, pas d’un objet</h2><p>Une banque de situations-problèmes tirées de la vie de la classe et de l’établissement, une boîte à outils de la créativité, une progression du cycle 1 au cycle 4 et des repères pour accompagner les élèves sans leur donner la solution.</p></div><a class="btn" href="#creativite">Découvrir la rubrique</a></div>
+
+  <div class="sec">
+    <header><p class="eyebrow">Partir de ce que vous enseignez</p><h2>Je prépare une séquence de…</h2><p style="color:var(--muted);max-width:44em;margin-top:6px">Le FabLab ne s’ajoute pas à votre programme. Choisissez la discipline : vous trouverez la notion, le projet qui la fait travailler et la séance de votre séquence qu’il remplace.</p></header>
+    <div class="bydisc">
+      <a href="#notions-maths"><b>Mathématiques</b><span>Nombres, mesure, cercle, durées, proportionnalité, moyenne, algorithmique</span></a>
+      <a href="#notions-sciences"><b>Sciences et technologie</b><span>Flottaison, énergie, circuit électrique, mouvements, chaîne d’information</span></a>
+      <a href="#notions-francais"><b>Langage et français</b><span>Lexique, hypothèse, protocole, oral, écrit pour un destinataire</span></a>
+      <a href="#notions-langues"><b>Langues vivantes</b><span>Questions de présentation, langues des familles</span></a>
+      <a href="#notions-emc"><b>EMC</b><span>Harcèlement, rôle des témoins, diversité</span></a>
+      <a href="#notions-arts"><b>Arts et musique</b><span>Lumière, motif, couture, peinture, son et instruments</span></a>
+    </div>
+  </div>
+
+  <div class="sec" id="projets">
+    <header><p class="eyebrow">Choisir un projet</p><h2>Par cycle</h2></header>
+    <div class="filters" role="group" aria-label="Filtrer par cycle" id="cfilters">
+      <button class="chip" data-f="all" aria-pressed="true">Tous</button>
+      <button class="chip" data-f="1" aria-pressed="false">Cycle 1 · maternelle</button>
+      <button class="chip" data-f="2" aria-pressed="false">Cycle 2 · CP–CE2</button>
+      <button class="chip" data-f="3" aria-pressed="false">Cycle 3 · CM1–6e</button>
+      <button class="chip" data-f="4" aria-pressed="false">Cycle 4 · 5e–3e</button>
+      <label class="lvsel" for="lvsel">Niveau
+        <select id="lvsel"><option value="all">Tous</option><option>PS</option><option>MS</option><option>GS</option><option>CP</option><option>CE1</option><option>CE2</option><option>CM1</option><option>CM2</option><option>6e</option><option>5e</option><option>4e</option><option>3e</option></select>
+      </label>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrer par moment de l’année" id="mfilters">
+      <span class="eyebrow" style="margin-right:4px">Au fil de l’année</span>
+      <button class="chip" data-m="all" aria-pressed="true">Tous</button>
+      <button class="chip" data-m="Noël" aria-pressed="false">Noël</button>
+      <button class="chip" data-m="Fête des mères et des pères" aria-pressed="false">Fête des mères et des pères</button>
+      <button class="chip" data-m="Décorer la classe" aria-pressed="false">Décorer la classe</button>
+      <button class="chip" data-m="Rentrée" aria-pressed="false">Rentrée</button>
+      <button class="chip" data-m="Hiver" aria-pressed="false">Hiver</button>
+      <button class="chip" data-m="Contre le harcèlement" aria-pressed="false">Contre le harcèlement</button>
+      <button class="chip" data-m="Carnaval" aria-pressed="false">Carnaval</button>
+      <button class="chip" data-m="Semaine des langues" aria-pressed="false">Semaine des langues</button>
+      <button class="chip" data-m="Semaine du développement durable" aria-pressed="false">Développement durable</button>
+      <button class="chip" data-m="Fête de fin d’année" aria-pressed="false">Fin d’année</button>
+      <button class="chip" data-m="Cross du collège" aria-pressed="false">Cross du collège</button>
+      <button class="chip" data-m="textile" aria-pressed="false">Tissu et couture</button>
+      <button class="chip" data-m="Toute l’année" aria-pressed="false">Toute l’année</button>
+    </div>
+    <p id="nores" class="eyebrow" hidden>Aucun projet pour ce choix : essayez un autre cycle.</p>
+    <div class="cards" id="cards"></div>
+  </div>
+
+  <div class="sec">
+    <header><p class="eyebrow">Imprimer pour les collègues</p><h2>Toutes les fiches en PDF</h2><p style="color:var(--muted);max-width:44em;margin-top:6px">Chaque fiche existe en version enseignant (complète) et en version élève (sans préparation, déroulé ni évaluation). Les recueils regroupent toutes les fiches, classées par cycle.</p></header>
+    <div class="dl"><a class="btn primary" href="pdf/recueil-enseignant.pdf" download>Recueil enseignant (PDF)</a><a class="btn ghost" href="pdf/recueil-eleve.pdf" download>Recueil élève (PDF)</a><a class="btn ghost" href="pdf/situations-detaillees.pdf" download>Situations-problèmes détaillées (PDF)</a></div>
+  </div>
+</section>
+
+<!-- PROJET -->
+<section id="v-projet" class="view" hidden></section>
+
+<!-- NOTIONS -->
+<section id="v-notions" class="view" hidden>
+  <div>
+    <p class="eyebrow">Partir du programme, pas du projet</p>
+    <h1 style="margin-top:10px">Quelle notion voulez-vous faire acquérir ?</h1>
+    <p style="font-size:1.15rem;color:var(--muted);margin-top:14px;max-width:42em">Chaque ligne relie une notion de votre discipline à un projet et au moment précis du projet où elle est travaillée. Le projet remplace une séance de votre séquence. La trace écrite reste dans le cahier de la discipline.</p>
+  </div>
+  <div class="filters" role="group" aria-label="Filtrer par discipline" id="discfilters">
+    <button class="chip" data-g="all" aria-pressed="true">Toutes</button>
+    <button class="chip" data-g="maths" aria-pressed="false">Mathématiques</button>
+    <button class="chip" data-g="sciences" aria-pressed="false">Sciences et technologie</button>
+    <button class="chip" data-g="francais" aria-pressed="false">Langage et français</button>
+    <button class="chip" data-g="langues" aria-pressed="false">Langues vivantes</button>
+    <button class="chip" data-g="emc" aria-pressed="false">EMC</button>
+    <button class="chip" data-g="arts" aria-pressed="false">Arts et musique</button>
+  </div>
+  <div id="notions-list" class="view" style="gap:32px"></div>
+</section>
+
+<!-- DÉMARRER -->
+<section id="v-demarrer" class="view" hidden>
+  <div>
+    <p class="eyebrow">Vous n’avez jamais fait de FabLab</p>
+    <h1 style="margin-top:10px">Votre premier projet en trois étapes</h1>
+    <p class="lead" style="font-size:1.15rem;color:var(--muted);margin-top:14px;max-width:40em">Un FabLab scolaire, ce n’est pas d’abord une salle de machines. C’est une façon de travailler : on donne un défi, les élèves fabriquent, testent, mesurent et améliorent. Une salle de classe, du carton et des ciseaux suffisent pour démarrer.</p>
+  </div>
+  <div class="start">
+    <div><span class="big">1</span><h3>Partir de votre séquence</h3><p>Prenez la prochaine notion que vous allez enseigner et cherchez le projet qui la fait travailler. Il remplacera la séance de découverte. Faites-le vous-même une fois : 30 minutes suffisent pour savoir où les élèves vont bloquer.</p><a href="#notions" class="btn ghost" style="width:max-content">Chercher par notion</a></div>
+    <div><span class="big">2</span><h3>Préparer le matériel en bacs</h3><p>Un bac par groupe avec le matériel compté. Les découpes difficiles (perçage, cutter) sont faites à l’avance par l’adulte. Préparez la zone de test : c’est elle qui donne son sens à la séance.</p></div>
+    <div><span class="big">3</span><h3>Garder le même rythme</h3><p>Défi (5 min), fabrication (20 à 25 min), test mesuré (10 min), bilan (5 min). Le test et la comparaison des résultats sont le cœur de l’apprentissage : ne les sacrifiez pas si le temps manque.</p></div>
+  </div>
+
+  <div class="two">
+    <div class="box">
+      <h3>Le kit de départ pour une classe</h3>
+      <ul class="clean check kit">
+        <li>Carton de récupération (boîtes, cartons ondulés)</li>
+        <li>Papier A4 80 g et bristol A4</li>
+        <li>Ruban adhésif de masquage (se déchire à la main)</li>
+        <li>Colle blanche vinylique</li>
+        <li>Ciseaux à bouts ronds, un par élève</li>
+        <li>Règles 30 cm et équerres</li>
+        <li>Mètre ruban et chronomètre (ou tablette)</li>
+        <li>Pailles, piques à brochette, cure-dents</li>
+        <li>Pâte à modeler</li>
+        <li>Poinçon et cutter réservés à l’adulte</li>
+        <li>Pistolet à colle basse température (adulte ou cycle 3 encadré)</li>
+        <li>Bacs de rangement étiquetés</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Ce qui fait réussir une séance</h3>
+      <ul class="clean learn">
+        <li>Ne pas montrer de modèle fini au début. Laisser chercher 10 minutes, puis montrer une photo ou un schéma pour débloquer.</li>
+        <li>Imposer un critère mesurable : une distance, une durée, un nombre d’objets portés.</li>
+        <li>Faire noter les résultats dans un tableau, même très simple.</li>
+        <li>Changer une seule chose à la fois entre deux essais.</li>
+        <li>Prendre une photo de chaque prototype. Elle sert au bilan et à l’évaluation.</li>
+        <li>Valoriser les échecs : « Qu’est-ce qui a cassé ? Pourquoi ? »</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec faq">
+    <header><h2>Les questions que l’on se pose</h2></header>
+    <details><summary>Je n’ai ni imprimante 3D ni découpeuse laser. Est-ce un problème ?</summary><p>Non. Presque tous les projets se font entièrement à la main. Les machines viennent après le prototype en carton, quand elles apportent de la précision ou permettent de fabriquer en série. Chaque fiche indique une version « FabLab » pour plus tard.</p></details>
+    <details><summary>Combien d’élèves par groupe ?</summary><p>Deux ou trois. Au-delà, un élève fabrique et les autres regardent. En maternelle, on travaille souvent seul ou en binôme sur des défis très courts.</p></details>
+    <details><summary>Que faire des élèves qui finissent très vite ?</summary><p>Chaque fiche propose des défis d’amélioration : porter plus, aller plus loin, utiliser moins de matière. Le premier prototype n’est jamais la fin du projet.</p></details>
+    <details><summary>Comment évaluer ?</summary><p>Chaque fiche donne une grille de trois ou quatre critères. On évalue la démarche (tester, mesurer, expliquer une amélioration), pas seulement la beauté de l’objet ni le meilleur résultat.</p></details>
+    <details><summary>Et le bruit, le rangement ?</summary><p>Prévoyez 5 minutes de rangement dans le minutage, avec un responsable de bac par groupe. Les prototypes sont stockés à plat dans une boîte nominative entre deux séances.</p></details>
+  </div>
+</section>
+
+<!-- MÉTHODE -->
+<section id="v-methode" class="view" hidden>
+  <div>
+    <p class="eyebrow">La démarche commune à tous les projets</p>
+    <h1 style="margin-top:10px">Comment se déroule un projet FabLab</h1>
+    <p style="font-size:1.15rem;color:var(--muted);margin-top:14px;max-width:42em">Chaque projet suit les six mêmes étapes, de la maternelle au collège. L’élève ne fabrique pas un objet en suivant un modèle : il cherche à répondre à un défi, il teste ce qu’il a fabriqué, il mesure, et il améliore. C’est en comprenant pourquoi son objet ne marche pas encore qu’il apprend.</p>
+  </div>
+  <div class="cycle-wrap">
+    <div class="box"><div id="cycle-svg"></div><p class="tip" style="margin-top:8px"><b>À retenir · </b>les étapes 4 et 5 forment une boucle. On teste, on change une chose, on reteste : deux ou trois fois dans un même projet.</p></div>
+    <div class="box">
+      <h3>Pourquoi cette démarche</h3>
+      <ul class="clean learn">
+        <li><b>Elle vient des programmes.</b> C’est la démarche d’investigation des sciences et la démarche de projet de la technologie, appliquées à un objet réel.</li>
+        <li><b>L’erreur devient une information.</b> Un pont qui s’effondre ou une toupie qui zigzague dit quelque chose : l’élève cherche la cause au lieu d’attendre la correction.</li>
+        <li><b>La mesure remplace l’avis.</b> On ne dit plus « c’est bien » : on compare 9 secondes et 14 secondes. La discussion porte sur des faits.</li>
+        <li><b>Elle se répète d’un projet à l’autre.</b> Les élèves reconnaissent les étapes et gagnent en autonomie au fil de l’année.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <header><p class="eyebrow">Les six étapes en détail</p><h2>Ce que fait l’enseignant, ce que font les élèves</h2><p style="color:var(--muted);max-width:44em;margin-top:6px">Pour chaque étape : son but, le rôle de chacun, la trace que l’on garde et l’erreur la plus fréquente. Un même exemple suit tout le projet : <a href="#toupie">la toupie en CE1</a>.</p></header>
+    <div class="phasecards" id="phasecards"></div>
+  </div>
+
+  <div class="sec">
+    <header><p class="eyebrow">De la maternelle au collège</p><h2>La même démarche, des exigences qui grandissent</h2></header>
+    <div class="agecols"><table>
+      <thead><tr><th>Étape</th><th>Cycle 1</th><th>Cycle 2</th><th>Cycle 3</th><th>Cycle 4</th></tr></thead>
+      <tbody>
+        <tr><th>1 · Le défi</th><td>« Est-ce que tu peux faire passer la voiture ? »</td><td>Un défi en une phrase et un critère simple : tenir 10 secondes.</td><td>Un défi, un critère mesurable et des contraintes de matériel.</td><td>Un besoin et un cahier des charges avec des critères chiffrés.</td></tr>
+        <tr><th>2 · Les idées</th><td>Dire ce qu’on va faire, le montrer avec les mains.</td><td>Un dessin simple avant de fabriquer.</td><td>Deux croquis légendés, choix argumenté dans le groupe.</td><td>Croquis cotés, plusieurs solutions comparées.</td></tr>
+        <tr><th>3 · Le prototype</th><td>Manipuler, assembler, essayer.</td><td>Fabriquer, avec un modèle de geste si besoin.</td><td>Fabriquer en autonomie avec des outils simples.</td><td>Maquette, puis fabrication numérique si elle apporte de la précision.</td></tr>
+        <tr><th>4 · Le test</th><td>Observer, compter les jetons.</td><td>Mesurer avec un instrument : règle, chronomètre.</td><td>Protocole, trois essais, valeur du milieu ou moyenne.</td><td>Protocole, critères du cahier des charges, validation.</td></tr>
+        <tr><th>5 · L’amélioration</th><td>Refaire autrement.</td><td>Changer une chose et comparer.</td><td>Une seule variable à la fois, hypothèse formulée.</td><td>Optimiser, comparer des solutions, justifier par les mesures.</td></tr>
+        <tr><th>6 · Le partage</th><td>Dire ce qu’on a fait, dictée à l’adulte, photo.</td><td>Une phrase écrite, une affiche de classe.</td><td>Trace écrite, schéma, présentation orale.</td><td>Présentation, dossier, fiche technique.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="sec">
+    <header><p class="eyebrow">Garder la trace</p><h2>Le cahier d’expériences, de la maternelle au CM2</h2><p style="color:var(--muted);max-width:44em;margin-top:6px">Chaque projet laisse une trace dans un même cahier, qui suit l’élève d’année en année. Il garde les hypothèses, les essais ratés, les mesures et ce que l’on a compris.</p></header>
+    <div class="start">
+      <div><h3>En maternelle</h3><p>Photos commentées, dessins d’observation et phrases dictées à l’adulte. Des affiches de classe avec des pictogrammes que les enfants savent lire : ✓ tient, ✗ tombe, une goutte pour l’eau.</p></div>
+      <div><h3>En cycle 2</h3><p>Le dessin légendé avant de fabriquer, le tableau de résultats, une phrase de conclusion écrite par l’élève. Les échantillons de matériaux peuvent être collés dans le cahier.</p></div>
+      <div><h3>En cycle 3</h3><p>L’hypothèse écrite, le protocole, les mesures, le graphique, la conclusion. Le cahier montre aussi ce qui n’a pas marché : c’est souvent là qu’on apprend le plus.</p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <header><p class="eyebrow">Le FabLab dans votre séquence</p><h2>Il remplace une séance, il ne s’ajoute pas</h2><p style="color:var(--muted);max-width:44em;margin-top:6px">Une séquence garde sa structure habituelle. Le projet prend la place d’une ou deux séances, le plus souvent la situation de départ et la phase de recherche. La structuration et l’entraînement restent dans votre discipline.</p></header>
+    <div class="seqbar">
+      <div class="fab"><span class="n">Phase 1</span><b>Situation déclenchante</b><span class="what">Le défi pose le problème. Les élèves ont besoin de la notion pour réussir.</span><span class="lab">FabLab</span></div>
+      <div class="fab"><span class="n">Phase 2</span><b>Recherche, investigation</b><span class="what">Prototype, test, mesures. Les élèves produisent leurs propres données.</span><span class="lab">FabLab</span></div>
+      <div><span class="n">Phase 3</span><b>Structuration</b><span class="what">Mise en commun des résultats, trace écrite dans le cahier de la discipline.</span></div>
+      <div><span class="n">Phase 4</span><b>Entraînement</b><span class="what">Exercices habituels, mais avec un exemple vécu auquel se référer.</span></div>
+      <div class="fab"><span class="n">Phase 5</span><b>Réinvestissement, évaluation</b><span class="what">Le défi d’amélioration ou un nouveau projet sert de tâche complexe.</span><span class="lab">FabLab</span></div>
+    </div>
+    <div class="example"><span class="eyebrow">Exemple en 6e · périmètre du cercle</span><p>Au lieu de donner la formule puis de faire des exercices, la séance 1 de la séquence est l’étape 3 de <a href="#voiture-elastique">la voiture à élastique</a> : « De combien avance la voiture quand la roue fait un tour ? ». Les élèves mesurent pour un bouchon et pour un CD, puis comparent au diamètre. La séance 2 institutionnalise P = π × D dans le cahier de mathématiques. Les séances 3 et 4 restent des séances d’entraînement classiques. La voiture revient en évaluation : prévoir la distance pour 10 tours.</p></div>
+  </div>
+
+  <div class="sec">
+    <header><h2>Cinq règles pour éviter la surcouche</h2></header>
+    <div class="rules">
+      <div><b>Partir de la notion</b><span>On choisit d’abord ce que les élèves doivent apprendre, puis le projet qui rend cette notion nécessaire.</span></div>
+      <div><b>Remplacer une séance</b><span>Le projet prend la place d’une séance de découverte ou de recherche. Le volume horaire de la séquence ne change pas.</span></div>
+      <div><b>Faire mesurer</b><span>C’est la mesure, le test et la comparaison qui portent l’apprentissage, pas la décoration de l’objet.</span></div>
+      <div><b>Écrire dans la discipline</b><span>La trace écrite va dans le cahier de mathématiques, de sciences ou de français, avec le vocabulaire de la discipline.</span></div>
+      <div><b>Évaluer la compétence</b><span>On évalue la notion visée et la démarche, jamais seulement la réussite de l’objet.</span></div>
+    </div>
+  </div>
+
+  <div class="do-dont">
+    <div class="yes"><h3>Un FabLab pédagogique</h3><p>L’élève part d’un défi, imagine, fabrique un prototype en carton, le teste, le mesure, l’améliore. Il choisit ensuite, si c’est utile, une machine pour obtenir une version plus précise. Il garde une trace de ce qu’il a fait.</p></div>
+    <div><h3>Une salle de machines</h3><p>L’élève télécharge un fichier, lance une impression, récupère l’objet. La machine a tout fait, l’élève n’a rien conçu ni testé. C’est ce que l’on cherche à éviter.</p></div>
+  </div>
+  <div class="example"><p class="eyebrow">Pour aller plus loin</p><p>Cette page donne la méthode en six phases. La rubrique <a href="#creativite">Projets & créativité</a> la développe : la démarche complète en treize étapes, une banque de situations-problèmes, une boîte à outils de la créativité, la progression du cycle 1 au cycle 4 et des repères pour <a href="#cr-accompagner">accompagner sans donner la solution</a>.</p></div>
+</section>
+
+<!-- SÉCURITÉ -->
+<section id="v-securite" class="view" hidden>
+  <div>
+    <p class="eyebrow">Fabriquer en sécurité</p>
+    <h1 style="margin-top:10px">Qui fait quoi, selon l’âge</h1>
+    <p style="font-size:1.15rem;color:var(--muted);margin-top:14px;max-width:40em">La règle est simple : les élèves gardent le maximum de gestes, l’adulte prend les gestes risqués. Ce tableau donne des repères. Il s’adapte au règlement de votre établissement et à votre évaluation des risques.</p>
+  </div>
+  <div class="agecols">
+    <table>
+      <thead><tr><th>Geste ou outil</th><th>Maternelle</th><th>CP–CE2</th><th>CM1–6e</th><th>5e–3e</th></tr></thead>
+      <tbody>
+        <tr><td>Ciseaux à bouts ronds</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+        <tr><td>Ciseaux classiques</td><td class="no">Non</td><td>Encadré</td><td>Oui</td><td>Oui</td></tr>
+        <tr><td>Cutter</td><td class="no">Adulte</td><td class="no">Adulte</td><td>Adulte, ou élève avec règle métal et tapis, encadré</td><td>Oui, avec règle métal, tapis et consigne</td></tr>
+        <tr><td>Poinçon, perçage de bouchons</td><td class="no">Adulte</td><td class="no">Adulte</td><td class="no">Adulte</td><td>Encadré</td></tr>
+        <tr><td>Pistolet à colle basse température</td><td class="no">Adulte</td><td class="no">Adulte</td><td>Poste dédié, encadré</td><td>Oui, poste dédié</td></tr>
+        <tr><td>Pile et LED</td><td>—</td><td>Boîtier fermé</td><td>Boîtier fermé avec interrupteur</td><td>Boîtier fermé, piles AA ou alimentation USB</td></tr>
+        <tr><td>Imprimante 3D</td><td>Démonstration</td><td>Observation</td><td>Fichier préparé par l’élève, lancement adulte</td><td>Lancement élève habilité</td></tr>
+        <tr><td>Découpeuse laser</td><td class="no">Non</td><td class="no">Non</td><td>Fichier élève, opération adulte</td><td>Fichier élève, opération adulte ou élève habilité, jamais sans surveillance</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="two">
+    <div class="safety">
+      <h3>Quatre règles qui ne changent jamais</h3>
+      <ul class="clean learn">
+        <li>Pas de pile bouton libre dans la classe. Une pile bouton avalée est une urgence vitale. On utilise uniquement des boîtiers fermés.</li>
+        <li>Jamais de secteur 230 V dans un objet d’élève. On reste en très basse tension : piles, batterie USB.</li>
+        <li>Une machine qui chauffe ou qui coupe ne tourne jamais sans un adulte présent devant elle.</li>
+        <li>À la découpeuse laser, on n’utilise qu’un matériau dont la composition est connue et déclaré compatible avec la machine et son système d’extraction. Jamais de PVC ni de matériau chloré.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Organiser la salle</h3>
+      <ul class="clean learn">
+        <li>Un poste « gestes adulte » à part, où l’on vient avec sa pièce.</li>
+        <li>Une zone de test dégagée et délimitée au sol avec du ruban.</li>
+        <li>Lunettes de protection pour les tests d’élastiques tendus et de projectiles.</li>
+        <li>Les outils coupants sont comptés au début et à la fin de la séance.</li>
+        <li>Au cutter, la lame n’est jamais dirigée vers le corps ni vers la main qui tient la règle.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS & CRÉATIVITÉ -->
+<section id="v-cr" class="view" hidden></section>
+<section id="v-sp" class="view" hidden></section>
+
+<!-- À PROPOS -->
+<section id="v-apropos" class="view about" hidden>
+  <div>
+    <p class="eyebrow">À propos</p>
+    <h1 style="margin-top:10px">FabLab en classe</h1>
+    <p style="font-size:1.15rem;color:var(--muted);margin-top:14px;max-width:40em">Une ressource pour les enseignants du réseau AEFE, de la petite section à la 3e. Chaque projet sert une séquence disciplinaire : il remplace une séance, il ne s’ajoute pas au programme.</p>
+  </div>
+  <div class="two">
+    <div class="box"><h3 style="margin-bottom:12px">Qui a fait ce site</h3>
+      <dl>
+        <dt>Conception pédagogique</dt><dd>Fehmi KLABI, EF2D Technologie<br>François Monnier, EF1D</dd>
+        <dt>Public</dt><dd>Enseignants du premier et du second degré du réseau AEFE</dd>
+        <dt>Version</dt><dd>2.0, octobre 2026 : ajout de la rubrique Projets & créativité</dd>
+      </dl>
+    </div>
+    <div class="box"><h3 style="margin-bottom:12px">Licence</h3>
+      <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" target="_blank" rel="noopener"><b>Creative Commons BY-NC-SA 4.0</b></a></p>
+      <ul class="clean learn" style="margin-top:10px">
+        <li>Vous pouvez copier, distribuer et adapter les fiches pour votre classe et vos collègues.</li>
+        <li>Vous citez les auteurs et le site d’origine.</li>
+        <li>Pas d’utilisation commerciale.</li>
+        <li>Les versions modifiées sont partagées sous la même licence.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box"><h3>Sources d’inspiration</h3>
+    <p style="margin-top:8px">Plusieurs projets s’inspirent de ressources publiques, citées en haut de chaque fiche concernée :</p>
+    <ul class="refs">
+      <li><a href="https://fondation-lamap.org/" target="_blank" rel="noopener">Fondation La main à la pâte</a> : séquences d’activités et défis scientifiques.</li>
+      <li><a href="https://www.larotonde-sciences.com/" target="_blank" rel="noopener">La Rotonde, centre de culture scientifique de Mines Saint-Étienne</a> : ressources pour les classes.</li>
+      <li><a href="https://www.lpo.fr/" target="_blank" rel="noopener">LPO, Ligue pour la protection des oiseaux</a> : nourrir les oiseaux en hiver.</li>
+    </ul>
+  </div>
+  <div class="box"><h3>Textes officiels utilisés</h3>
+    <p style="margin-top:8px">Chaque fiche indique, niveau par niveau, le programme applicable en 2026-2027. Ces repères ont été vérifiés au Bulletin officiel et sur éduscol le 1er octobre 2026.</p>
+    <ul class="refs">
+      <li>Programme de l’école maternelle : <a href="https://www.education.gouv.fr/bo/2026/Hebdo19/MENE2608627A" target="_blank" rel="noopener">arrêté du 16 avril 2026, BO n°19 du 7 mai 2026</a>, en application à la rentrée 2026.</li>
+      <li>Français et mathématiques, cycle 2 : <a href="https://www.education.gouv.fr/bo/2024/Hebdo41/MENE2415135A" target="_blank" rel="noopener">BO n°41 du 31 octobre 2024</a>.</li>
+      <li>Français et mathématiques, cycle 3 : <a href="https://www.education.gouv.fr/bo/2025/Hebdo16/MENE2504620A" target="_blank" rel="noopener">BO n°16 du 17 avril 2025</a> (CM1 et 6e depuis 2025, CM2 à la rentrée 2026).</li>
+      <li>Français et mathématiques, cycle 4 : <a href="https://www.education.gouv.fr/bo/2026/Hebdo10/MENE2602912A" target="_blank" rel="noopener">BO n°10 du 5 mars 2026</a> (5e en 2026, 4e en 2027, 3e en 2028).</li>
+      <li>Sciences et technologie, cycles 2 et 3 : <a href="https://www.education.gouv.fr/bo/2026/Hebdo24/MENE2611650A" target="_blank" rel="noopener">BO n°24 du 11 juin 2026</a> (CP et CM1 en 2026 ; CE1, CE2, CM2 et 6e en 2027).</li>
+      <li>EPS et histoire-géographie, cycles 2 et 3 : <a href="https://www.education.gouv.fr/bo/2026/Hebdo22/MENE2608631A" target="_blank" rel="noopener">BO n°22 du 28 mai 2026</a> (CP et CM1 en 2026 ; CE1, CE2, CM2 et 6e en 2027).</li>
+      <li>Langues vivantes, école élémentaire : <a href="https://www.education.gouv.fr/bo/2026/Hebdo12/MENE2602911A" target="_blank" rel="noopener">BO n°12 du 19 mars 2026</a> (CP et CM1 en 2026 ; CE1, CE2 et CM2 en 2027).</li>
+      <li>Langues vivantes, collège : <a href="https://www.education.gouv.fr/bo/2025/Hebdo22/MENE2504621A" target="_blank" rel="noopener">BO n°22 du 29 mai 2025</a> (6e en 2025, 5e en 2026, 4e en 2027, 3e en 2028).</li>
+      <li>Enseignement moral et civique : <a href="https://www.education.gouv.fr/bo/2024/Hebdo24/MENE2413934A" target="_blank" rel="noopener">BO n°24 du 13 juin 2024</a> (CE2, 6e et 3e entrent en application en 2026).</li>
+      <li>Technologie, cycle 4 : <a href="https://www.education.gouv.fr/bo/2024/Hebdo9/MENE2402802A" target="_blank" rel="noopener">BO n°9 du 29 février 2024</a> (3e à la rentrée 2026).</li>
+      <li>Autres disciplines et niveaux non encore renouvelés : <a href="https://www.education.gouv.fr/bo/20/Hebdo31/MENE2018714A.htm" target="_blank" rel="noopener">programmes des cycles 2, 3 et 4, BO n°31 du 30 juillet 2020</a>.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">FabLab en classe · conception pédagogique Fehmi KLABI et François Monnier · réseau AEFE · version 2.0, octobre 2026 · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" target="_blank" rel="noopener">licence CC BY-NC-SA 4.0</a> · <a href="#apropos">À propos</a></div>
+</footer>
+
+<script src="js/dessins.js"></script>
+<script src="js/projets.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
