@@ -617,6 +617,43 @@ details.tool ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:col
  .bfrow > .lab{min-width:100%}
 }
 @media print{.tabs,.crsub,.bfilters{display:none !important}.tabp{display:flex !important}}
+.formlock{max-width:560px;margin:24px auto;padding:32px}
+.formlock form{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.formlock .frow{display:flex;gap:10px;flex-wrap:wrap}
+.formlock input{flex:1;min-width:180px;font:inherit;font-size:1.1rem;letter-spacing:.08em;padding:10px 14px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.formlock input:focus{border-color:var(--mat);outline:none}
+#fmsg{min-height:1.4em;color:var(--cut);font-weight:700}
+#v-formation .probleme p{font-size:1.08rem}
+.mico{width:46px;height:46px;flex:none;border-radius:12px;background:var(--mat-soft);display:inline-flex;align-items:center;justify-content:center}
+.mico svg{width:30px;height:30px}
+.themes .mico{width:30px;height:30px;border-radius:8px}.themes .mico svg{width:20px;height:20px}
+.matcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.matcard{display:grid;grid-template-columns:46px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.matcard > div{min-width:0;display:flex;flex-direction:column;gap:6px}
+.matcard h3{font-size:1.08rem}
+.matcard p{font-size:.93rem}
+.matcard .qty{color:var(--muted);font-family:var(--f-mono);font-size:.78rem}
+.tag.saf-vert,.chip.saf-vert[aria-pressed="true"]{background:#2E7D4F;color:#fff;border-color:#2E7D4F}
+.tag.saf-orange,.chip.saf-orange[aria-pressed="true"]{background:#B45309;color:#fff;border-color:#B45309}
+.tag.saf-rouge,.chip.saf-rouge[aria-pressed="true"]{background:#B3263A;color:#fff;border-color:#B3263A}
+.lvcard{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--mat);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:18px}
+.lvcard > header{display:flex;gap:20px;align-items:center}
+.lvbig{font-family:var(--f-display);font-weight:800;font-size:3.4rem;line-height:1;min-width:2.2em}
+.lvcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.lvcols > div{background:var(--bg);border-radius:12px;padding:14px 16px;min-width:0}
+.lvcols > div.know{background:var(--mat-soft)}
+.lvcols h3{font-size:1.02rem;margin-bottom:8px}
+.lvuse{background:var(--tape-soft);border-radius:12px;padding:12px 16px}
+.deploy{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.deploy > div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.deploy > div.first{border:2px solid var(--mat)}
+.deploy .budget{font-family:var(--f-display);font-weight:800;font-size:1.4rem;color:var(--mat)}
+.saf3{border-top:8px solid !important}
+.saf3.saf-vert{border-top-color:#2E7D4F !important}.saf3.saf-orange{border-top-color:#B45309 !important}.saf3.saf-rouge{border-top-color:#B3263A !important}
+.matplan svg{max-width:100%}
+a.chip{text-decoration:none;color:var(--ink)}
+a.chip[aria-pressed="true"]{color:var(--bg)}
+@media (max-width:760px){.deploy{grid-template-columns:1fr}.matplan{display:none}.lvcard > header{flex-direction:column;align-items:flex-start;gap:6px}}
 </style>
 </head>
 <body>
@@ -634,7 +671,9 @@ details.tool ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:col
       <a href="#notions" data-nav="notions">Par notion</a>
       <a href="#demarrer" data-nav="demarrer">Démarrer</a>
       <a href="#methode" data-nav="methode">La méthode</a>
+      <a href="#materiel" data-nav="materiel">Matériel</a>
       <a href="#securite" data-nav="securite">Sécurité</a>
+      <a href="#formation" data-nav="formation">Formation</a>
       <a href="#apropos" data-nav="apropos">À propos</a>
     </nav>
   </div>
@@ -893,6 +932,10 @@ details.tool ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:col
       </tbody>
     </table>
   </div>
+  <div class="sec"><header><p class="eyebrow">Un code lisible par les élèves</p><h2>Vert, orange, rouge</h2><p style="color:var(--muted);max-width:46em;margin-top:6px">La sécurité ne repose pas seulement sur l’interdiction : elle s’enseigne. Une signalétique stable, affichée sur les bacs et les postes, développe l’autonomie tout en distinguant ce qui relève de l’élève, de l’accompagnement et de l’adulte.</p></header>
+    <div class="deploy"><div class="saf3 saf-vert"><h3>Vert · autonomie</h3><p>Matériel utilisable après apprentissage du geste : crayons, colle, ciseaux sécurisés, carton, pâte, blocs, robots de sol, outils de mesure.</p></div><div class="saf3 saf-orange"><h3>Orange · accompagné</h3><p>Usage en petit groupe ou avec un adulte : aiguilles, outils manuels plus précis, pistolet basse température, tour de potier, multimètre, certaines découpes.</p></div><div class="saf3 saf-rouge"><h3>Rouge · adulte</h3><p>Machines et opérations à risques : four céramique, laser, entretien d’imprimante 3D, outils électroportatifs, plastifieuse chaude selon modèle.</p></div></div>
+    <p style="font-size:.93rem;color:var(--muted)">Chaque matériel du <a href="#mat-catalogue">catalogue</a> porte son repère. Les règles exactes s’ajustent à l’âge, au matériel retenu, aux notices des fabricants et aux procédures de l’établissement. Pour l’impression 3D avec de jeunes élèves, privilégier une machine fermée et un protocole qui limite l’accès aux parties chaudes et mobiles.</p>
+  </div>
   <div class="two">
     <div class="safety">
       <h3>Quatre règles qui ne changent jamais</h3>
@@ -919,6 +962,12 @@ details.tool ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:col
 <!-- PROJETS & CRÉATIVITÉ -->
 <section id="v-cr" class="view" hidden></section>
 <section id="v-sp" class="view" hidden></section>
+
+<!-- MATÉRIEL -->
+<section id="v-mat" class="view" hidden></section>
+
+<!-- FORMATION -->
+<section id="v-formation" class="view" hidden></section>
 
 <!-- À PROPOS -->
 <section id="v-apropos" class="view about" hidden>
@@ -951,6 +1000,7 @@ details.tool ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:col
       <li><a href="https://fondation-lamap.org/" target="_blank" rel="noopener">Fondation La main à la pâte</a> : séquences d’activités et défis scientifiques.</li>
       <li><a href="https://www.larotonde-sciences.com/" target="_blank" rel="noopener">La Rotonde, centre de culture scientifique de Mines Saint-Étienne</a> : ressources pour les classes.</li>
       <li><a href="https://www.lpo.fr/" target="_blank" rel="noopener">LPO, Ligue pour la protection des oiseaux</a> : nourrir les oiseaux en hiver.</li>
+      <li><a href="https://github.com/xseorkly/fablab" target="_blank" rel="noopener">Laboratoire de créativité & FabLab, volume 1</a> (F. Klabi, F. Monnier) : catalogue des matériels, zones, référentiels par niveau et équipement progressif de la rubrique Matériel.</li>
     </ul>
   </div>
   <div class="box"><h3>Textes officiels utilisés</h3>
