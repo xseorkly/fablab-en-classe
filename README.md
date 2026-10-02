@@ -5,25 +5,24 @@ Ressource pour les enseignants du réseau AEFE, de la petite section à la 3e : 
 Conception pédagogique : **Fehmi KLABI** (EF2D Technologie) et **François Monnier** (EF1D).
 Version 2.0, octobre 2026 : ajout de la rubrique « Projets & créativité ».
 
+## Accès protégé
+
+Le site s’ouvre sur une page d’entrée publique (présentation, images) et demande un mot de passe. Tout le contenu est chiffré dans le dépôt (AES-GCM, clé dérivée du mot de passe par PBKDF2) : sans le mot de passe, les fichiers sont illisibles, même en ouvrant le code source. Le mot de passe n’est écrit nulle part dans le dépôt. Pour le changer, il faut régénérer le site chiffré. L’onglet Formation garde en plus son propre code d’accès.
+
 ## Contenu
 
 ```
-index.html        page du site (structure et styles)
-js/dessins.js     fonctions qui dessinent les schémas SVG
-js/projets.js     données : projets, volet didactique, sources, situations-problèmes, notes enseignant
-js/app.js         interface : rendu des fiches, filtres, navigation, programmes 2026-2027
-pdf/              une fiche enseignant et une fiche élève par projet, le recueil élève
-pdf/situations/   les 12 fiches détaillées de situations-problèmes
-                  (pdf/situations-banque.pdf regroupe les 66 situations ; pour les 54 situations sans fiche
-                  séparée, le bouton du site ouvre ce recueil à la bonne page)
-formation/        déroulé, trois diaporamas (dont les consignes stagiaire) et livret du stagiaire, chiffrés (s’ouvrent avec le code d’accès)
-.nojekyll         indique à GitHub Pages de servir les fichiers tels quels
+index.html        page d’entrée (publique) et déchiffrement du site
+site.enc.json     le site complet, chiffré : pages, projets, interface
+pdf/*.pdf.enc     fiches enseignant et élève, recueil élève, recueil des 66 situations, chiffrés
+pdf/situations/   les 12 fiches détaillées de situations-problèmes, chiffrées
+formation/        déroulé, diaporamas et livret du stagiaire, chiffrés avec le code formateur
 ```
 
 ## Mettre le site en ligne avec GitHub Pages
 
 1. Créez un dépôt public sur GitHub (par exemple `fablab-en-classe`).
-2. Déposez tout le contenu de ce dossier à la racine du dépôt, y compris le fichier caché `.nojekyll`.
+2. Déposez tout le contenu de ce dossier à la racine du dépôt.
 3. Dans **Settings → Pages**, choisissez **Deploy from a branch**, branche `main`, dossier `/ (root)`.
 4. Le site est publié après une à deux minutes à l'adresse `https://<votre-compte>.github.io/fablab-en-classe/`.
 
