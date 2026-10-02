@@ -714,6 +714,9 @@ html.locked body > :not(#gate),body.locked > :not(#gate){display:none!important}
 .g-why div{border-left:6px solid var(--tape);background:var(--card);border-radius:0 14px 14px 0;padding:16px 18px}
 .g-why b{display:block;font-family:var(--f-display);font-size:1.08rem;margin-bottom:4px}
 .g-why span{color:var(--muted);font-size:.95rem}
+.g-outbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
+.g-out{font:inherit;font-weight:800;font-size:.95rem;padding:10px 18px;border-radius:999px;border:1.5px solid var(--cut);background:var(--card);color:var(--cut);cursor:pointer}
+.g-out:hover{background:var(--cut);color:#fff}
 .g-foot{margin-top:auto;border-top:1px solid var(--line);padding-block:22px;color:var(--muted);font-size:.9rem}
 @media (max-width:900px){.g-hero{grid-template-columns:1fr;padding-block:32px 20px}.g-cards{grid-template-columns:1fr 1fr}.g-why{grid-template-columns:1fr}.g-fig{display:none}}
 @media (max-width:520px){.g-cards{grid-template-columns:1fr}.g-lg.irf{display:none}.g-row{flex-direction:column}}
@@ -786,6 +789,14 @@ async function mount(P){
   document.body.insertAdjacentHTML("beforeend",P.html);
   document.body.classList.remove("locked");document.documentElement.classList.remove("locked");
   const sc=document.createElement("script");sc.textContent=P.js;document.body.appendChild(sc);
+  const ft=document.querySelector("footer .wrap");
+  if(ft){const bar=document.createElement("div");bar.className="g-outbar";
+    bar.innerHTML='<span>Vous êtes connecté au site FabLab en classe.</span><button type="button" class="g-out">Se déconnecter</button>';
+    ft.appendChild(bar);bar.querySelector("button").addEventListener("click",logout)}
+}
+function logout(){
+  try{sessionStorage.removeItem(KEY);localStorage.removeItem(KEY);sessionStorage.removeItem("fablab-formation")}catch(e){}
+  location.replace(location.pathname+location.search);
 }
 async function pdf(href){
   const [path,frag]=href.split("#");
