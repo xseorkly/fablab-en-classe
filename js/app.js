@@ -131,7 +131,7 @@ function renderProject(p){
     <div class="mode" role="group" aria-label="Affichage"><button data-m="prof" aria-pressed="true">Vue enseignant</button><button data-m="eleve" aria-pressed="false">Vue élève, à projeter</button></div>
     <small>La vue élève masque la préparation, le déroulé et l’évaluation.</small>
   </div>
-  ${PDFS[p.id]?`<div class="dl"><a class="btn primary" href="pdf/${PDFS[p.id].e}" download>Fiche PDF enseignant</a><a class="btn ghost" href="pdf/${PDFS[p.id].s}" download>Fiche PDF élève</a></div>`:""}
+  ${PDFS[p.id]?`<div class="dl"><a class="btn primary" href="pdf/${PDFS[p.id].e}" target="_blank" rel="noopener">Fiche PDF enseignant</a><a class="btn ghost" href="pdf/${PDFS[p.id].s}" target="_blank" rel="noopener">Fiche PDF élève</a></div>`:""}
 
   ${noteBlock(p)}
 
@@ -427,7 +427,7 @@ function renderSP(id){
     <div><dt>Durée</dt><dd>${s.dureeTxt||CR_DUREES[s.duree]}</dd></div><div><dt>Démarche</dt><dd>${CR_DEMS[s.demarche]}</dd></div><div><dt>Ouverture</dt><dd>${CR_OUVS[s.ouv]}</dd></div><div><dt>Âge</dt><dd>${s.age}</dd></div></dl>
     <div class="meta">${s.theme.map(t=>`<a class="tag th" href="#cr-banque?t=${t}">${CR_THEMES[t][0]}</a>`).join("")}${s.mat.map(m=>`<span class="tag mach">${CR_MATS[m]}</span>`).join("")}</div>
     ${s.orga?`<div class="box" style="padding:12px 14px"><span class="eyebrow">Organisation</span><p style="margin-top:4px;font-size:.95rem">${s.orga}</p></div>`:""}
-    ${typeof SPPDF!=="undefined"&&SPPDF[s.id]?`<a class="btn primary" href="pdf/situations/${SPPDF[s.id]}" download>Fiche PDF</a>`:""}
+    ${typeof SPPDF!=="undefined"&&SPPDF[s.id]?`<a class="btn primary" href="pdf/situations/${SPPDF[s.id]}" target="_blank" rel="noopener">Fiche PDF</a>`:""}${typeof SPPAGE!=="undefined"&&SPPAGE[s.id]?`<a class="btn primary" href="pdf/situations-banque.pdf#page=${SPPAGE[s.id]}" target="_blank" rel="noopener">Fiche PDF · page ${SPPAGE[s.id]} du recueil</a>`:""}
    </div></div>
   <div class="adire"><span class="eyebrow">À dire aux élèves</span><p>« ${s.aDire} »</p></div>`;
   if(!s.full){
@@ -653,7 +653,10 @@ async function formFile(name,label,btn){
   try{const buf=new Uint8Array(await (await fetch("formation/"+name)).arrayBuffer());
     const k=await formKey(FORM_CODE,buf.slice(0,16));
     const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:buf.slice(16,28)},k,buf.slice(28));
-    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([pt],{type:"application/pdf"}));a.download=label;document.body.appendChild(a);a.click();a.remove();
+    const u=URL.createObjectURL(new Blob([pt],{type:"application/pdf"}));
+    const a=document.createElement("a");a.href=u;a.download=label;a.className="btn ghost";a.textContent="Enregistrer : "+label;a.style.marginLeft="8px";
+    btn.insertAdjacentElement("afterend",a);try{a.click()}catch(e){}
+    btn.textContent=t;btn.disabled=false;return;
   }catch(e){alert("Téléchargement impossible : "+e.message)}
   btn.disabled=false;btn.textContent=t;
 }

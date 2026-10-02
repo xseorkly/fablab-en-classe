@@ -12,9 +12,11 @@ index.html        page du site (structure et styles)
 js/dessins.js     fonctions qui dessinent les schémas SVG
 js/projets.js     données : projets, volet didactique, sources, situations-problèmes, notes enseignant
 js/app.js         interface : rendu des fiches, filtres, navigation, programmes 2026-2027
-pdf/              une fiche enseignant et une fiche élève par projet, les deux recueils
-pdf/situations/   les fiches détaillées de situations-problèmes, plus leur recueil
-formation/        déroulé et diaporamas de la formation, chiffrés (s’ouvrent avec le code d’accès)
+pdf/              une fiche enseignant et une fiche élève par projet, le recueil élève
+pdf/situations/   les 12 fiches détaillées de situations-problèmes
+                  (pdf/situations-banque.pdf regroupe les 66 situations ; pour les 54 situations sans fiche
+                  séparée, le bouton du site ouvre ce recueil à la bonne page)
+formation/        déroulé, trois diaporamas (dont les consignes stagiaire) et livret du stagiaire, chiffrés (s’ouvrent avec le code d’accès)
 .nojekyll         indique à GitHub Pages de servir les fichiers tels quels
 ```
 
@@ -37,7 +39,7 @@ Organisation de l’espace en neuf zones, catalogue filtrable de 174 matériels 
 
 ## L’onglet Formation
 
-Il contient le déroulé de la formation de 3 heures, les sept défis, l’atelier réflexif et les annexes. Son contenu et les fichiers du dossier `formation/` sont chiffrés (AES-GCM, clé dérivée du code d’accès par PBKDF2) : sans le code, ils sont illisibles, même en ouvrant le code source. Le code n’est écrit nulle part dans le dépôt. Pour le changer, il faut rechiffrer le contenu.
+Il contient le déroulé de la formation de 3 heures, les sept défis, l’atelier réflexif, les annexes, les trois diaporamas (formateur partie 1, formateur partie 2, consignes stagiaire) et le livret du stagiaire à imprimer (documents D1 à D8). Son contenu et les fichiers du dossier `formation/` sont chiffrés (AES-GCM, clé dérivée du code d’accès par PBKDF2) : sans le code, ils sont illisibles, même en ouvrant le code source. Le code n’est écrit nulle part dans le dépôt. Pour le changer, il faut rechiffrer le contenu.
 
 ## Modifier un projet
 
